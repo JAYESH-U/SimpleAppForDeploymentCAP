@@ -1,0 +1,73 @@
+@server=http://localhost:4004
+@username=Viewer
+@password=Viewer@123
+
+
+### Customers
+# @name Customers_GET
+GET {{server}}/odata/v4/customer/Customers
+Authorization: Basic {{username}}:{{password}}
+
+
+### Customers Drafts GET
+# @name Customers_Drafts_GET
+GET {{server}}/odata/v4/customer/Customers?$filter=(IsActiveEntity eq false)
+Authorization: Basic {{username}}:{{password}}
+
+
+### Customers Draft POST
+# @name Customers_Draft_POST
+POST {{server}}/odata/v4/customer/Customers
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "name": "name-15374310",
+  "city": "y-15374310",
+  "ctry": "y-15374310",
+  "sales": 8242978.25,
+  "createdAt": "2000-07-22T00:00:00.000Z",
+  "createdBy": "createdBy.95iw6@example.net",
+  "modifiedAt": "2022-05-27T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.95iw6@example.com"
+}
+
+
+### Result from POST request above
+@draftID={{Customers_Draft_POST.response.body.$.ID}}
+
+
+### Customers Draft PATCH
+# @name Customers_Draft_Patch
+PATCH {{server}}/odata/v4/customer/Customers(ID={{draftID}},IsActiveEntity=false)
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "name": "name-15374310",
+  "city": "y-15374310",
+  "ctry": "y-15374310",
+  "sales": 8242978.25,
+  "createdAt": "2000-07-22T00:00:00.000Z",
+  "createdBy": "createdBy.95iw6@example.net",
+  "modifiedAt": "2022-05-27T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.95iw6@example.com"
+}
+
+
+### Customers Draft Prepare
+# @name Customers_Draft_Prepare
+POST {{server}}/odata/v4/customer/Customers(ID={{draftID}},IsActiveEntity=false)/CustomerService.draftPrepare
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{}
+
+
+### Customers Draft Activate
+# @name Customers_Draft_Activate
+POST {{server}}/odata/v4/customer/Customers(ID={{draftID}},IsActiveEntity=false)/CustomerService.draftActivate
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{}

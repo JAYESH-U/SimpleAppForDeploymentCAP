@@ -1,0 +1,35 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.CustomerUser",
+      "description": "CustomerUser"
+    },
+    {
+      "name": "$XSAPPNAME.CustomerManager",
+      "description": "CustomerManager"
+    },
+    {
+      "name": "$XSAPPNAME.CustomerViewer",
+      "description": "CustomerViewer"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "CustomerUser",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.CustomerUser"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "CustomerManager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.CustomerManager"
+      ],
+      "attribute-references": []
+    }
+  ]
+}
